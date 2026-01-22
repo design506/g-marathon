@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://g-marathon.kr/bbs/home.php -->
+<html lang="ko" style="--vsc-domain: &quot;g-marathon.kr&quot;;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="X-UA-Compatible" content="IE=10,chrome=1">
+<title>마라톤</title>
+<link rel="stylesheet" href="./default.css">
+<link rel="stylesheet" href="./style.css">
+<!--[if lte IE 8]>
+<script src="https://g-marathon.kr:443/bbs/js/html5.js"></script>
+<![endif]-->
+<script>
+// 자바스크립트에서 사용하는 전역변수 선언
+var g5_url       = "https://g-marathon.kr:443/bbs";
+var g5_bbs_url   = "https://g-marathon.kr:443/bbs/bbs";
+var g5_is_member = "";
+var g5_is_admin  = "";
+var g5_is_mobile = "";
+var g5_bo_table  = "";
+var g5_sca       = "";
+var g5_editor    = "";
+var g5_cookie_domain = "";
+</script>
+<script src="./jquery-1.8.3.min.js.다운로드"></script>
+<script src="./jquery.menu.js.다운로드"></script>
+<script src="./common.js.다운로드"></script>
+<script src="./wrest.js.다운로드"></script>
+<style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      width: 1000px !important;
+      margin: 0px !important;
+      margin-left: -500px !important;
+      position: fixed !important;
+      z-index: 2147483647 !important; /* Maximum z-index to overcome overlays */
+      background: none !important;
+      pointer-events: none !important;
+      display: inline-block !important;
+      visibility: visible  !important;
+      white-space: pre-line;
+    }
+    .tippy-box[data-theme~="custom"], .tippy-box[data-theme~="ocr"], .tippy-content *{
+      font-size: 18px  !important;
+      text-align: center !important;
+      overflow-wrap: break-word !important;
+      color: #ffffffff !important;
+      font-family: 
+        -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif  !important;
+      white-space: pre-line;
+    }
+    .tippy-box[data-theme~="custom"]{
+      max-width: 200px  !important;
+      backdrop-filter: blur(6px) !important;
+      background-color: #00000080 !important;
+      border: 1px solid #ffffff00; 
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      opacity: 1.0; /* Adjusted opacity for transparency */
+    }
+    .tippy-box[data-theme~="ocr"]{
+      max-width: $1000px  !important;
+      backdrop-filter: blur(6px) !important;
+      background-color: #00000080 !important;
+      border: 1px solid #ffffff00; 
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      opacity: 1.0; /* Adjusted opacity for transparency */
+    }
+    .tippy-box[data-theme~="transparent"] {
+      max-width: $1000px  !important;
+      backdrop-filter: blur(6px) !important;
+      background-color: #00000080 !important;
+      border: 1px solid #ffffff00; 
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      opacity: 0.0; /* Adjusted opacity for transparency */
+      transition: opacity 0.3s ease-in-out; /* Added transition for opacity */
+    }
+    [data-tippy-root] {
+      display: inline-block !important;
+      visibility: visible  !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='top'] > .tippy-arrow::before, .tippy-box[data-theme~='ocr'][data-placement^='top'] > .tippy-arrow::before { 
+      border-top-color: #00000080 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='bottom'] > .tippy-arrow::before, .tippy-box[data-theme~='ocr'][data-placement^='bottom'] > .tippy-arrow::before {
+      border-bottom-color: #00000080 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='left'] > .tippy-arrow::before, .tippy-box[data-theme~='ocr'][data-placement^='left'] > .tippy-arrow::before {
+      border-left-color: #00000080 !important;
+    }
+    .tippy-box[data-theme~='custom'][data-placement^='right'] > .tippy-arrow::before, .tippy-box[data-theme~='ocr'][data-placement^='right'] > .tippy-arrow::before {
+      border-right-color: #00000080 !important;
+    }
+
+    .mtt-highlight{
+      background-color: #21dc6d40  !important;
+      position: absolute !important;   
+      z-index: 2147483646 !important; /* Slightly lower than tooltip */
+      pointer-events: none !important;
+      display: inline !important;
+      border-radius: 3px !important;
+    }
+    .mtt-image{
+      width: 180px  !important;
+      border-radius: 3px !important;
+    }
+    .ocr_text_div{
+      position: absolute;
+      opacity: 0.4;
+      color: transparent !important;
+      border: 2px solid CornflowerBlue;
+      background: none !important;
+      border-radius: 3px !important;
+    }</style><style id="mttstyleSubtitle">
+    #ytp-caption-window-container .ytp-caption-segment {
+      cursor: text !important;
+      user-select: text !important;
+      font-family: 
+      -apple-system, BlinkMacSystemFont,
+      "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif  !important;
+    }
+    .caption-visual-line{
+      display: flex  !important;
+      align-items: stretch  !important;
+      direction: ltr
+    }
+    .captions-text .caption-visual-line:first-of-type:after {
+      content: '⣿⣿';
+      border-radius: 3px !important;
+      color: white !important;
+      background: transparent !important;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      display: inline-block;
+      vertical-align: top;
+      opacity:0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    .ytp-caption-segment{
+      color: white !important;
+      text-shadow: 1px 1px 2px black !important;
+      backdrop-filter: blur(3px) !important;
+      background: rgba(8, 8, 8, 0.1)  !important;
+    }
+    .captions-text:hover .caption-visual-line:first-of-type:after {
+      opacity:1;
+    }
+    .ytp-pause-overlay {
+      display: none !important;
+    }
+    .ytp-expand-pause-overlay .caption-window {
+      display: block !important;
+    }
+  </style></head>
+<body>
+
+<!-- 상단 시작 { -->
+<div id="body">
+<!-- 상단 시작 { -->
+<div id="hd" style="z-index: 1000;">
+    <h1 id="hd_h1">마라톤</h1>
+
+
+    
+<!-- 팝업레이어 시작 { -->
+<div id="hd_pop">
+    <h2>팝업레이어 알림</h2>
+
+<span class="sound_only">팝업레이어 알림이 없습니다.</span></div>
+
+<script>
+$(function() {
+    $(".hd_pops_reject").click(function() {
+        var id = $(this).attr('class').split(' ');
+        var ck_name = id[1];
+        var exp_time = parseInt(id[2]);
+        $("#"+id[1]).css("display", "none");
+        set_cookie(ck_name, 1, exp_time, g5_cookie_domain);
+    });
+    $('.hd_pops_close').click(function() {
+        var idb = $(this).attr('class').split(' ');
+        $('#'+idb[1]).css('display','none');
+    });
+    $("#hd").css("z-index", 1000);
+});
+</script>
+<!-- } 팝업레이어 끝 -->
+    <div id="hd_wrapper">
+
+        <div id="logo">
+            <a href="https://g-marathon.kr/"><img src="./logo11.png" alt=""></a>
+        </div>
+				<div>
+					<!--<img src="/bbs/img/main_top_img11.png" />-->
+    		</div>
+
+    </div>
+
+    <hr>
+
+
+</div>
+<!-- } 상단 끝 -->
+
+<hr>
+
+<!-- 콘텐츠 시작 { -->
+
+
+
+<div id="wrapper">
+<link href="./top_menu.css" type="text/css" rel="stylesheet">
+<script src="./top_menu.js.다운로드" type="text/javascript"></script>
+
+<div id="navigation1">
+	<ul id="nav1">
+		<!--<li style="width:150px">
+			<a href="/">Home</a>
+		</li>-->
+		<!--<li><a href="/bbs/bbs/content.php?co_id=company&gr_id=gr_1">회사소개</a>
+  		<ul>
+  			<li><a href="/bbs/bbs/content.php?co_id=company&gr_id=gr_1">회사소개</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=group&gr_id=gr_1">조직구성</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=company_map&gr_id=gr_1">사무실약도</a></li>
+  		</ul>
+		</li>-->
+
+		<li><a href="https://g-marathon.kr/bbs/bbs/content.php?co_id=sub2_1&amp;gr_id=gr_2">대회안내</a>
+  		<!--<ul>
+				<li><a href="/bbs/bbs/content.php?co_id=sub2_1&gr_id=gr_2">대회요강</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=course&gr_id=gr_2">코스안내</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=map&gr_id=gr_2">대회장안내</a></li>
+
+			</ul>-->
+		</li>
+
+    <li><a href="https://g-marathon.kr/bbs/bbs/content.php?co_id=course&amp;gr_id=gr_2">대회코스</a>
+  		<!--<ul>
+				<li><a href="/bbs/bbs/content.php?co_id=sub2_1&gr_id=gr_2">대회요강</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=course&gr_id=gr_2">코스안내</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=map&gr_id=gr_2">대회장안내</a></li>
+        -->
+		</li>
+
+    <li><a href="https://g-marathon.kr/bbs/bbs/content.php?co_id=map&amp;gr_id=gr_2">대회장안내</a>
+  		<!--<ul>
+				<li><a href="/bbs/bbs/content.php?co_id=sub2_1&gr_id=gr_2">대회요강</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=course&gr_id=gr_2">코스안내</a></li>
+  			<li><a href="/bbs/bbs/content.php?co_id=map&gr_id=gr_2">대회장안내</a></li>
+			</ul>-->
+		</li>
+
+		<li><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=agree">참가신청</a>
+  		<!--<ul>
+  			<li><a href="/bbs/bbs/board.php?bo_table=sat">참가신청</a> </li>
+
+			</ul>-->
+		</li>
+		<!--
+		<li><a href="/bbs/bbs/board.php?bo_table=agree">참가신청/조회</a>
+  		<ul>
+  			<li><a href="/bbs/bbs/board.php?bo_table=record">기록조회</a></li>
+			</ul>
+		</li>-->
+
+		<li><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery">갤러리</a>
+			<!--<ul>
+  			<li><a href="/bbs/bbs/board.php?bo_table=news">마라톤뉴스</a></li>
+				<li><a href="/bbs/bbs/board.php?bo_table=medical">마라톤메디컬</a> </li>
+				<li><a href="/bbs/bbs/board.php?bo_table=pr">대회홍보</a> </li>
+
+			</ul>-->
+		</li>
+
+		<li><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1">커뮤니티</a>
+  		<!--<ul>
+  			<li><a href="/bbs/bbs/board.php?bo_table=notice">공지사항</a></li>
+  			<li><a href="/bbs/bbs/board.php?bo_table=free">자유게시판</a></li>
+				<li><a href="/bbs/bbs/board.php?bo_table=notice">공지사항</a></li>
+
+				<li><a href="/bbs/bbs/board.php?bo_table=gallery">갤러리</a></li>
+			</ul>-->
+		</li>
+		
+		<li><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1&amp;wr_id=921">혹서기 5연풀</a>
+  		
+		</li>
+</ul></div>
+</div>
+
+
+<script type="text/javascript" src="./coin-slider.js.다운로드"></script>
+<link rel="stylesheet" href="./coin-slider-styles.css" type="text/css">
+<script>
+	$(function(){
+		$('#coin-slider').coinslider({
+ 		spw: 5, // squares per width
+		sph: 3, // squares per height
+		delay: 6000, // delay between images in ms
+		sDelay: 5, // delay beetwen squares in ms
+		opacity: 0.5, // opacity of title and navigation
+		//titleSpeed: 500, // speed of title appereance in ms
+		effect: '', // random, swirl, rain, straight
+		navigation: false, // prev next and buttons
+		links : false, // show images as links
+		hoverPause: false, // pause on hover
+		width: 600, // width of slider panel
+		height: 350 // height of slider panel
+	});
+});
+
+</script>
+
+<div id="index_center">
+	<div id="index_in">
+
+		<div id="index_1">
+			<div class="coin-slider" id="coin-slider-coin-slider"><div id="coin-slider" style="background-image: url(&quot;/bbs/img/img_2.png&quot;); width: 600px; height: 350px; position: relative; background-position: left top;">
+				<img src="./img_1.png" style="display: none;">
+				<img src="./img_2.png" style="display: none;">
+				<img src="./img_3.png" style="display: none;">
+
+			<div class="cs-title" id="cs-title-coin-slider" style="position: absolute; bottom: 0px; left: 0px; z-index: 1000; opacity: 0;"></div><div class="cs-coin-slider" id="cs-coin-slider11" style="width: 120px; height: 117px; float: left; position: absolute; background-position: 0px 0px; left: 0px; top: 0px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider12" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -120px 0px; left: 120px; top: 0px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider13" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -240px 0px; left: 240px; top: 0px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider14" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -360px 0px; left: 360px; top: 0px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider15" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -480px 0px; left: 480px; top: 0px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider21" style="width: 120px; height: 117px; float: left; position: absolute; background-position: 0px -117px; left: 0px; top: 117px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider22" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -120px -117px; left: 120px; top: 117px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider23" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -240px -117px; left: 240px; top: 117px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider24" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -360px -117px; left: 360px; top: 117px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider25" style="width: 120px; height: 117px; float: left; position: absolute; background-position: -480px -117px; left: 480px; top: 117px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider31" style="width: 120px; height: 116px; float: left; position: absolute; background-position: 0px -234px; left: 0px; top: 234px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider32" style="width: 120px; height: 116px; float: left; position: absolute; background-position: -120px -234px; left: 120px; top: 234px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider33" style="width: 120px; height: 116px; float: left; position: absolute; background-position: -240px -234px; left: 240px; top: 234px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider34" style="width: 120px; height: 116px; float: left; position: absolute; background-position: -360px -234px; left: 360px; top: 234px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div><div class="cs-coin-slider" id="cs-coin-slider35" style="width: 120px; height: 116px; float: left; position: absolute; background-position: -480px -234px; left: 480px; top: 234px; opacity: 1; background-image: url(&quot;/bbs/img/img_3.png&quot;);" href="" target=""></div></div></div>
+		</div>
+
+		<div id="index_2">
+			<img src="./main_right.png" usemap="#Map">
+
+ 			<!--<map name="Map">
+			  <area shape="rect" coords="0,0,128,115" href="/bbs/bbs/board.php?bo_table=sat" >
+			  <area shape="rect" coords="128,0,265,115" href="/marathon/info/summary.php?gr_id=gr_2" >
+			  <area shape="rect" coords="0,115,128,235" href="/marathon/course/map.php?gr_id=gr_2" >
+				<area shape="rect" coords="128,115,265,235" href="/marathon/info/waymap.php?gr_id=gr_2"></map>-->
+
+		</div>
+
+</div>
+</div>
+
+
+
+<!-- } 최신글 끝 -->
+<div id="wrapper">
+
+	<div style="float:left;padding-right:20px;">
+        
+<!-- 부산갈매기게시판 최신글 시작 { -->
+<div class="lt">
+    <strong class="lt_title"><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1">부산갈매기게시판</a></strong>
+    <ul>
+            <li>
+            <a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1&amp;wr_id=2420"><strong>2025년12월 대회일졍입니다</strong></a>  <img src="./icon_hot.gif" alt="인기글">          </li>
+            <li>
+            <a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1&amp;wr_id=2366"><strong>정우그룹 이명국회장님과 대회장 이상관…</strong></a>  <img src="./icon_hot.gif" alt="인기글">          </li>
+            <li>
+            <a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1&amp;wr_id=2365"><strong>2024년 청소년 장학금 전달식 관련…</strong></a>  <img src="./icon_hot.gif" alt="인기글"> <img src="./icon_file.gif" alt="첨부파일">          </li>
+            </ul>
+    <div class="lt_more"><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=tb_1"><span class="sound_only">부산갈매기게시판</span>더보기</a></div>
+</div>
+<!-- } 부산갈매기게시판 최신글 끝 -->	</div>
+	<div style="float:left;padding-right:20px;">
+        
+<!-- 공지사항 최신글 시작 { -->
+<div class="lt">
+    <strong class="lt_title"><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=notice">공지사항</a></strong>
+    <ul>
+            <li>
+            <a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=notice&amp;wr_id=126"><strong>2025년 11월 대회 일정 입니다</strong></a>  <img src="./icon_hot.gif" alt="인기글">          </li>
+            <li>
+            <a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=notice&amp;wr_id=125">2025년6월 대회일정 입니다</a>  <img src="./icon_hot.gif" alt="인기글">          </li>
+            <li>
+            <a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=notice&amp;wr_id=124"><strong>2025년1월 대회일졍입니다</strong></a>  <img src="./icon_hot.gif" alt="인기글">          </li>
+            </ul>
+    <div class="lt_more"><a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=notice"><span class="sound_only">공지사항</span>더보기</a></div>
+</div>
+<!-- } 공지사항 최신글 끝 -->	</div>
+	<div style="float:left;">
+        
+<style>
+#oneshot { position:relative;margin:0}
+#oneshot .la_title{position:absolute; left:0; top:0; z-index:100; background:#000; padding:5px; font-size:1em; color:#fff;margin:0 0 0 5px;filter:alpha(opacity=50);opacity:.5;}
+#oneshot .img_set{width:110px; height:80px; background:#fafafa;padding:0;}
+#oneshot .subject_set{width:97px; height:58px; padding:5px 10px 10px 3px; z-index:1; bottom:0; left:0;}
+#oneshot .subject_set .sub_title{color:#333;height:17px;overflow:hidden;padding:3px 0 0 0;font-size:1.2em;font-family:NanumBarunGothic,dotum;}
+#oneshot .subject_set .sub_content{color:#8c8a8a;height:30px;overflow:hidden;padding:3px 0 0;font-family:NanumGothic,dotum;}
+
+
+#oneshot ul {list-style:none;clear:both;margin:0;padding:0;}
+#oneshot li{float:left;list-style:none;text-decoration:none;padding:0 0 0 5px}
+.subject_set  a:link, a:visited {color:#333;text-decoration:none}
+.subject_set  a:hover, a:focus, a:active {color:#e60012;text-decoration:none}
+
+/* 폰트불러오기 */
+@font-face {font-family:'NanumBarunGothic';src: url('https://g-marathon.kr:443/bbs/skin/latest/clean_gallery/NanumBarunGothic.eot');}
+@font-face {font-family:'NanumGothic';src: url('https://g-marathon.kr:443/bbs/skin/latest/clean_gallery/NanumGothic.eot');}
+
+</style>
+<div id="oneshot">
+	<div class="la_title">갤러리</div>
+	<ul>
+		
+		<li>
+			<div class="img_set">
+				<a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery&amp;wr_id=132">
+					NO IMAGE				</a>
+			</div>
+			<div class="subject_set">
+				<div class="sub_title"><a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery&amp;wr_id=132">박창기님 입금되었습니다</a></div>
+				<div class="sub_content"></div>
+			</div>
+		</li>
+		
+		<li>
+			<div class="img_set">
+				<a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery&amp;wr_id=131">
+					NO IMAGE				</a>
+			</div>
+			<div class="subject_set">
+				<div class="sub_title"><a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery&amp;wr_id=131">남정조님 입금되었습니다</a></div>
+				<div class="sub_content"></div>
+			</div>
+		</li>
+		
+		<li>
+			<div class="img_set">
+				<a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery&amp;wr_id=130">
+					NO IMAGE				</a>
+			</div>
+			<div class="subject_set">
+				<div class="sub_title"><a href="http://g-marathon.kr/bbs/bbs/board.php?bo_table=gallery&amp;wr_id=130">이수대님 입금되었습니다</a></div>
+				<div class="sub_content"></div>
+			</div>
+		</li>
+		</ul>
+</div>
+<div style="clear:both;"></div>
+	</div>
+
+ <div id="index_contents">
+
+    </div>
+</div>
+
+<!-- } 콘텐츠 끝 -->
+
+<div style="height:30px"></div>
+
+<hr>
+
+
+
+<!-- 하단 시작 { -->
+<div id="ft">
+            <div id="ft_catch"></div>
+    
+    <div id="ft_company">
+    <!--
+    	<a href='http://www.e-powermarathon.com/' target='_blank'>
+				<img class='banner' src="/bbs/banner/jeongi.gif" width="120px" height="40px" /></a>
+    	<a href='http://울릉도마라톤.kr/' target='_blank'>
+				<img class='banner' src="/bbs/banner/ulleongdo.gif" width="120px" height="40px" /></a>
+			<a href='http://www.ysmarathon.co.kr/' target='_blank'>
+				<img class='banner' src="/bbs/banner/yesu.gif" width="120px" height="40px" /></a>
+    	<a href='http://www.tourmarathon.com/' target='_blank'>
+				<img class='banner' src="/bbs/banner/yeoido.gif" width="120px" height="40px" /></a>
+			<a href='http://ecomarathon.kr/main.asp' target='_blank'>
+				<img class='banner' src="/bbs/banner/hwankyung.gif" width="120px" height="40px" /></a>
+    	<a href='http://www.seoulmarathon.co.kr/' target='_blank'>
+				<img class='banner' src="/bbs/banner/kukje.gif" width="120px" height="40px" /></a>
+			<a href='http://suwonmarathon.com/' target='_blank'>
+				<img class='banner' src="/bbs/banner/suwon.gif" width="120px" height="40px" /></a>
+    	<a href='http://www.hangangmarathon.kr/' target='_blank'>
+				<img class='banner' src="/bbs/banner/hangang.gif" width="120px" height="40px" /></a>
+    -->
+    <!--
+    	<img src="https://g-marathon.kr:443/bbs/img/ft.png" alt="그누보드5">
+    -->
+    
+    </div>
+    <div id="ft_copy">
+        <div>
+            <!--<a href="https://g-marathon.kr:443/bbs/bbs/content.php?co_id=company">회사소개</a>-->
+            <a href="https://g-marathon.kr/bbs/bbs/content.php?co_id=sub2_1&amp;gr_id=gr_2">대회안내</a>
+            <a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=agree">참가신청</a> 
+            
+            <a href="https://g-marathon.kr/bbs/bbs/board.php?bo_table=notice">공지사항</a>
+            사무실 : 부산 광역시 연제구 중앙대로 1150번지 상아노블 602호 (우편 47519) 
+            Copyright © <b>2014 g-marathon.kr</b> All rights reserved.<br>
+            <a href="https://g-marathon.kr/bbs/home.php#hd" id="ft_totop">Top</a>
+        </div>
+    </div>
+</div>
+</div> <!-- end body -->
+
+
+<!-- } 하단 끝 -->
+<br>
+
+
+
+<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
+<!--[if lte IE 7]>
+<script>
+$(function() {
+    var $sv_use = $(".sv_use");
+    var count = $sv_use.length;
+
+    $sv_use.each(function() {
+        $(this).css("z-index", count);
+        $(this).css("position", "relative");
+        count = count - 1;
+    });
+});
+</script>
+<![endif]-->
+
+
+
+</body></html>
